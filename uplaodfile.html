@@ -1,0 +1,56 @@
+<md-dialog aria-label="Reject" ng-cloak style="min-width:550px;border-radius:0px;" ng-controller="TribeMydocumentsPageController as vm">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span class="md-subhead padding-right-20">Upload Files</span>
+            <span class="flex"></span>
+            <md-button class="md-icon-button" aria-label="Close" ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <form name="form" style="height:400px">
+        <div class="layout-row layout-align-center-center flex" ngf-drop ngf-select ng-model="files" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="*" ngf-pattern="'*'">
+            <div class="padding-25">
+                <md-button>
+                    <md-icon md-font-icon="zmdi zmdi-upload" style="font-size: 6rem;"></md-icon>
+                </md-button>
+                <div class="">
+                    <h2>Drop File to Upload</h2>
+                </div>
+            </div>
+        </div>
+        <md-divider></md-divider>
+        <div class="layout-row layout-align-start-start flex">
+            <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected">
+                <thead md-head>
+                    <tr md-row>
+                        <th md-column>Name</th>
+                        <th md-column>Size</th>
+                        <th md-column>Progress</th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row md-select="f" md-on-select="" ng-repeat="f in files" style="font:smaller">
+                        <td md-cell>{{f.name}} {{f.$error}} {{f.$errorParam}}</td>
+                        <td md-cell>{{f.size}} {{f.$error}} {{f.$errorParam}}</td>
+                        <td md-cell>
+                            <!-- <div class="percent">{{log}}%</div> -->
+                            <div class="percent">100%</div>
+                            <div class="progress-bar">
+                                <div class="uploaded" ng-style="{'width': log+'%'}"></div>
+                            </div>
+                            <!-- <md-progress-linear md-mode="determinate" value="{{ vm.uploadFilesProgress }}"></md-progress-linear> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+    <md-subheader class="jcp-subheader height-56 md-no-sticky">
+        <div class="layout-row layout-align-end-center">
+            <md-button ng-click="vm.cancel($event)">CANCEL</md-button>
+            <div flex></div>
+            <md-button class="md-primary" ng-click="vm.save($event)">SAVE</md-button>
+        </div>
+    </md-subheader>
+</md-dialog>
